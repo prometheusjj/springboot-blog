@@ -20,19 +20,19 @@
             <h3>欢迎注册</h3>
        	  	  <form action="/doRegister" method="post" id="registerForm">
                   <span id="reg_span"></span>
-                  <input id="phone" name="phone" type="text" class="kuang_txt phone" placeholder="手机号" onblur="checkPhone();"><span id="phone_ok"></span>
+                  <input id="phone" name="phone" type="text" class="kuang_txt phone" placeholder="手机号" onblur="checkPhone();" autocomplete="off"><span id="phone_ok"></span>
                   <br/>
                 <span id="phone_span" style="color: red"></span>
-                <input id="email" name="email" type="text" class="kuang_txt email" placeholder="邮箱" onblur="checkEmail();"><span id="email_ok"></span>
+                <input id="email" name="email" type="text" class="kuang_txt email" placeholder="邮箱" onblur="checkEmail();" autocomplete="off"><span id="email_ok"></span>
                   <br/>
                   <span id="email_span" style="color: red"></span>
-                <input id="password" name="password" type="password" class="kuang_txt possword" placeholder="密码" onKeyUp="CheckIntensity(this.value)" onblur="checkPassword();">
+                <input id="password" name="password" type="password" class="kuang_txt possword" placeholder="密码" onKeyUp="CheckIntensity(this.value)" onblur="checkPassword();" autocomplete="off">
                   <br/>
                   <span id="password_span"></span>
-                <input id="nickName" name="nickName" type="text" class="kuang_txt possword" placeholder="昵称" onblur="checkNickName();">
+                <input id="nickName" name="nickName" type="text" class="kuang_txt possword" placeholder="昵称" onblur="checkNickName();" autocomplete="off">
                   <br/>
                   <span id="nickName_span" style="color: red"></span>
-                  <input id="code" name="code" type="text" class="kuang_txt yanzm" placeholder="验证码" onblur="checkCode()">
+                  <input id="code" name="code" type="text" class="kuang_txt yanzm" placeholder="验证码" onblur="checkCode()" autocomplete="off">
                   <div>
                       <IMG id="captchaImg" style="CURSOR: pointer"
                            onclick="changeCaptcha()"
@@ -134,46 +134,47 @@
             $("#phone").focus();
             flag2 = false;
         }else{
-            $("#phone_span").text("");
-            $("#reg_span").text("");
-            $("#phone_ok").text("√").css("color","green");
-            // $.ajax({
-            //     type:'post',
-            //     url:'/checkPhone',
-            //     data: {"phone":phone},
-            //     dataType:'json',
-            //     success:function(data){
-            //         var val = data['message'];
-            //         if(val=="success"){
-            //             $("#phone_span").text("");
-            //             $("#reg_span").text("");
-            //             $("#phone_ok").text("√").css("color","green");
-            //
-            //             var content = $("#phone_ok").text();
-            //             if(content=="√" ){
-            //                 var hgt = $("#regist-left").height();
-            //                 if(v==1){
-            //                     $("#regist-left").height(hgt-30);
-            //                     $("#regist-right").height(hgt-30);
-            //                 }
-            //                 v=0;
-            //             }
-            //             flag2 =  true;
-            //
-            //         }else{
-            //
-            //             $("#phone_span").text("该手机号已经注册！");
-            //             $("#phone_ok").text("");
-            //             var hgt = $("#regist-left").height();
-            //             if(v==0){
-            //                 $("#regist-left").height(hgt+30);
-            //                 $("#regist-right").height(hgt+30);
-            //                 v++;
-            //             }
-            //             flag2 =  false;
-            //         }
-            //     }
-            // });
+            // $("#phone_span").text("");
+            // $("#reg_span").text("");
+            // $("#phone_ok").text("√").css("color","green");
+            $.ajax({
+                type:'post',
+                url:'/checkPhone',
+                data: {"phone":phone},
+                dataType:'json',
+                success:function(data){
+                    var val = data['message'];
+                    if(val=="success"){
+                        $("#phone_span").text("");
+                        $("#reg_span").text("");
+                        $("#phone_ok").text("√").css("color","green");
+
+                        var content = $("#phone_ok").text();
+                        if(content=="√" ){
+                            var hgt = $("#regist-left").height();
+                            if(v==1){
+                                $("#regist-left").height(hgt-30);
+                                $("#regist-right").height(hgt-30);
+                            }
+                            v=0;
+                        }
+                        flag2 =  true;
+
+                    }else{
+
+                        $("#phone_span").text("该手机号已经注册！");
+                        $("#phone_ok").text("");
+                        var hgt = $("#regist-left").height();
+                        if(v==0){
+                            $("#regist-left").height(hgt+30);
+                            $("#regist-right").height(hgt+30);
+                            v++;
+                        }
+                        $("#phone").focus();
+                        flag2 =  false;
+                    }
+                }
+            });
             flag2 = true;
         }
 
@@ -238,6 +239,7 @@
                 cp++;
                 increaseHeight();
             }
+
             return false;
         }
 
@@ -270,6 +272,7 @@
             }
             $("#email_span").text("请输入邮箱账号！");
             $("#email_ok").text("");
+            $("#email").focus();
              flag_e = false;
         }else if(!(/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+$/.test(email))){
             $("#email_span").text("邮箱账号不存在，请重新输入！");
@@ -278,9 +281,14 @@
                 increaseHeight();
                 e++;
             }
+            $("#email").focus();
              flag_e = false;
         }else{
             //验证邮箱是否已经注册
+            $("#email_span").text("");
+            $("#reg_span").text("");
+            $("#email_ok").text("√").css("color","green");
+            flag_e = true;
             $.ajax({
                 type:'post',
                 url:'/checkEmail',
@@ -314,6 +322,7 @@
                             $("#regist-right").height(hgt+30);
                             v++;
                         }
+                        $("#email").focus();
                         flag_e =  false;
                     }
                 }
@@ -329,6 +338,7 @@
         nickName = nickName.replace(/^\s+|\s+$/g,"");
         if(nickName == ""){
             $("#nickName_span").text("请输入昵称！");
+            $("#nick_name").focus();
             return false;
         }else{
             $("#nickName_span").text("");
@@ -344,8 +354,11 @@
         code = code.replace(/^\s+|\s+$/g,"");
         if(code == ""){
             $("#code_span").text("请输入验证码！").css("color","red");
+            $("#code").focus();
             flag_c = false;
-        }else{
+        }
+        else{
+            flag_c = true;
             $.ajax({
                 type: 'post',
                 url: '/checkCode',
@@ -359,6 +372,9 @@
                         flag_c = true;
                     }else {
                         $("#code_span").text("验证码错误！").css("color","red");
+                        changeCaptcha();
+                        $("#code").text("");
+                        $("#code").focus();
                         flag_c = false;
                     }
                 }

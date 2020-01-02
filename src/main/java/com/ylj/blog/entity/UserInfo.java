@@ -1,14 +1,14 @@
-package wang.dreamland.www.entity;
+package com.ylj.blog.entity;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+//import javax.persistence.GeneratedValue;
+//import javax.persistence.GenerationType;
+//import javax.persistence.Id;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class UserInfo {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @Id
+//    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private Long uId;

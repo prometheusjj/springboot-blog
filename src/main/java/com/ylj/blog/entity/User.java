@@ -9,11 +9,11 @@ public class User {
 
     private String phone;
 
-    private String nickName;
+    private String nick_name;
 
     private String state;
 
-    private String imgUrl;
+    private String img_url;
 
     private String enable;
 
@@ -50,11 +50,11 @@ public class User {
     }
 
     public String getNickName() {
-        return nickName;
+        return nick_name;
     }
 
-    public void setNickName(String nickName) {
-        this.nickName = nickName;
+    public void setNickName(String nick_name) {
+        this.nick_name = nick_name;
     }
 
     public String getState() {
@@ -66,11 +66,11 @@ public class User {
     }
 
     public String getImgUrl() {
-        return imgUrl;
+        return img_url;
     }
 
-    public void setImgUrl(String imgUrl) {
-        this.imgUrl = imgUrl;
+    public void setImgUrl(String img_url) {
+        this.img_url = img_url;
     }
 
     public String getEnable() {

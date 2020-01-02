@@ -1,4 +1,4 @@
-package wang.dreamland.www.entity;
+package com.ylj.blog.entity;
 
 
 import javax.persistence.*;

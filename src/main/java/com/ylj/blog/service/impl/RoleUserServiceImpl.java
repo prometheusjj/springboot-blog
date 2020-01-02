@@ -1,4 +1,8 @@
 package com.ylj.blog.service.impl;
 
-public class RoleUserServiceImpl {
+import com.ylj.blog.service.RoleUserService;
+import org.springframework.stereotype.Service;
+
+@Service
+public class RoleUserServiceImpl implements RoleUserService {
 }

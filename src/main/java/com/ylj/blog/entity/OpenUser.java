@@ -1,4 +1,4 @@
-package wang.dreamland.www.entity;
+package com.ylj.blog.entity;
 
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;

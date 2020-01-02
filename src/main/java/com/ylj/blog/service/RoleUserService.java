@@ -1,4 +1,5 @@
 package com.ylj.blog.service;
 
-public class RoleUserService {
+public interface RoleUserService {
+
 }
