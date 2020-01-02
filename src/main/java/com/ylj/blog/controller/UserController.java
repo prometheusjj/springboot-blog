@@ -14,10 +14,16 @@ public class UserController {
     @Autowired
     private UserService userService;
 
-    @RequestMapping("/")
+    @RequestMapping("/register")
     public String index() {
         System.out.println(">>>>>");
-        return "test";
+        return "register";
+    }
+
+    @RequestMapping("/login")
+    public String Login() {
+        System.out.println(">>>>>");
+        return "login";
     }
 
     @RequestMapping("/findByAll")

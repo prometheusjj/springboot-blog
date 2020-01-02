@@ -4,7 +4,7 @@
 
 
     <!--<sql id="Base_Column_List">-->
-      <!--id, email, password,phone,state,img_url-->
+    <!--id, email, password,phone,state,img_url-->
     <!--</sql>-->
 
     <!-- 查询所有数据 -->
@@ -12,6 +12,21 @@
         SELECT id, email, password,phone,nick_name,state,img_url,enable  FROM  user
     </select>
 
+    <insert id="regist" parameterType="com.ylj.blog.entity.User">
+        insert into User (id, email, password,phone,nick_name,state,img_url,enable)
+        values (#{id},#{email},#{password},#{phone},#{nick_name},#{state},#{img_url},#{enable})
+    </insert>
 
+    <select id="findByEmail" resultType="com.ylj.blog.entity.User">
+        select * from user where email = #{email}
+    </select>
+
+    <select id="findByPhone" resultType="com.ylj.blog.entity.User">
+        select * from user where phone = #{phone}
+    </select>
+
+    <select id="findById" resultType="com.ylj.blog.entity.User">
+        select * from user where id = #{id}
+    </select>
 
 </mapper>
